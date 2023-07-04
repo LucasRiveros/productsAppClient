@@ -1,0 +1,44 @@
+<app-loading-spinner *ngIf="loading; else content"></app-loading-spinner>
+<ng-template #content>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="card">
+          <div class="card-body text-center">
+            <span class="title">{{ title | uppercase}}</span>
+            <form [formGroup]="productForm" (ngSubmit)="createProduct()" class="mt-3">
+              <div class="mb-3">
+                <input type="text" formControlName="product" class="form-control form-control-lg" placeholder="Product">
+                <div *ngIf="productForm.get('product')?.hasError('required') && productForm.get('product')?.touched" class="text-danger">
+                  <span>A product is required</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <input type="text" formControlName="category" class="form-control form-control-lg" placeholder="Category">
+                <div *ngIf="productForm.get('category')?.hasError('required') && productForm.get('category')?.touched" class="text-danger">
+                  <span>A category is required</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <input type="text" formControlName="location" class="form-control form-control-lg" placeholder="Location">
+                <div *ngIf="productForm.get('location')?.hasError('required') && productForm.get('location')?.touched" class="text-danger">
+                  <span>A location is required</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <input type="number" formControlName="price" class="form-control form-control-lg" placeholder="Price">
+                <div *ngIf="productForm.get('price')?.hasError('required') && productForm.get('price')?.touched" class="text-danger">
+                  <span>A price is required</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <button routerLink="/" class="btn btn-secondary btn-lg float-start">Go back</button>
+                <button type="submit" [disabled]="productForm.invalid" class="btn btn-success btn-lg float-end">Save product</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
